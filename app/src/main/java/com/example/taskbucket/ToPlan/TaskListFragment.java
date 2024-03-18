@@ -1,22 +1,23 @@
 package com.example.taskbucket.ToPlan;
 
+import static com.example.taskbucket.MainActivity.masterlist;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.taskbucket.R;
 import com.example.taskbucket.databinding.FragmentTasklistBinding;
+import com.example.taskbucket.tasks.Task;
 
 
 public class TaskListFragment extends Fragment {
@@ -33,7 +34,7 @@ public class TaskListFragment extends Fragment {
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        /* super.onViewCreated(view, savedInstanceState);
 
         binding.addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,12 +44,13 @@ public class TaskListFragment extends Fragment {
             }
         });
         //todo - rework for scrolling table view
-        TableLayout taskTable = binding.taskTable;
-        TableRow newrow = new TableRow(view.getContext());
-        TextView success = new TextView(view.getContext());
-        success.setText("SUCCESS!");
-        newrow.addView(success);
-        taskTable.addView(newrow);
+       TableLayout taskTable = binding.taskTable;
+            TableRow newrow = new TableRow(view.getContext());
+            TextView success = new TextView(view.getContext());
+            success.setText(masterlist.getTaskName(1));
+            newrow.addView(success);
+            taskTable.addView(newrow);
+*/
     }
 
 }

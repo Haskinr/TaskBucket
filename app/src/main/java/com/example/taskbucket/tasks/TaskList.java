@@ -1,7 +1,7 @@
 package com.example.taskbucket.tasks;
 
+import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 
 public class TaskList {
@@ -23,5 +23,8 @@ public class TaskList {
     }
     public String getTaskName (int index){
         return tasks.get(index).getName();
+    }
+    public Collection<Task> getTasks (){
+        return tasks.values();
     }
 }
