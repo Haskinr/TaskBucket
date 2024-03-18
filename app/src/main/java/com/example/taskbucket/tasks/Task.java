@@ -3,6 +3,7 @@ package com.example.taskbucket.tasks;
 import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -15,6 +16,8 @@ public class Task {
     public Task(String name){
         this.name = name;
         this.id = Calendar.getInstance().toString();
+
+
     }
 
     public View getTaskView(Context context) {

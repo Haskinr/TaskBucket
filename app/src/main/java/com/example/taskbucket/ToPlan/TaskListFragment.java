@@ -2,7 +2,9 @@ package com.example.taskbucket.ToPlan;
 
 import static com.example.taskbucket.MainActivity.masterlist;
 
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +36,7 @@ public class TaskListFragment extends Fragment {
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        /* super.onViewCreated(view, savedInstanceState);
+        super.onViewCreated(view, savedInstanceState);
 
         binding.addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +52,7 @@ public class TaskListFragment extends Fragment {
             success.setText(masterlist.getTaskName(1));
             newrow.addView(success);
             taskTable.addView(newrow);
-*/
+
     }
 
 }
