@@ -1,6 +1,9 @@
 package com.example.taskbucket.ToPlan;
 
+import static com.example.taskbucket.MainActivity.masterlist;
+
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.taskbucket.R;
 import com.example.taskbucket.databinding.FragmentNewTaskBinding;
+import com.example.taskbucket.tasks.Task;
 
 public class NewTaskFragment extends Fragment {
     private FragmentNewTaskBinding binding;
@@ -34,6 +38,9 @@ public class NewTaskFragment extends Fragment {
         binding.finishBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Editable etext = binding.inputNewTaskName.getText();
+                masterlist.addTask(new Task(etext.toString()));
+
                 NavHostFragment.findNavController(NewTaskFragment.this)
                         .navigate(R.id.action_newTaskFragment_to_TaskListFragment);
             }

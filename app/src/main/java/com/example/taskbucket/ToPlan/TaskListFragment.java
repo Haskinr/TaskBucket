@@ -2,9 +2,7 @@ package com.example.taskbucket.ToPlan;
 
 import static com.example.taskbucket.MainActivity.masterlist;
 
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,10 +25,7 @@ public class TaskListFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentTasklistBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -41,17 +36,19 @@ public class TaskListFragment extends Fragment {
         binding.addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(TaskListFragment.this)
-                        .navigate(R.id.action_TaskListFragment_to_newTaskFragment);
+                NavHostFragment.findNavController(TaskListFragment.this).navigate(R.id.action_TaskListFragment_to_newTaskFragment);
             }
         });
         //todo - rework for scrolling table view
-       TableLayout taskTable = binding.taskTable;
+        for (Task t: masterlist.getTasks()
+        ) {
+            TableLayout taskTable = binding.taskTable;
             TableRow newrow = new TableRow(view.getContext());
             TextView success = new TextView(view.getContext());
-            success.setText(masterlist.getTaskName(1));
+            success.setText(t.getName());
             newrow.addView(success);
             taskTable.addView(newrow);
+        }
 
     }
 

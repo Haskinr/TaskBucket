@@ -58,7 +58,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
                         android:clickable="true"
-                        android:src="@android:drawable/ic_input_add" />
+                        android:src="@android:drawable/ic_menu_delete"
+                        app:useCompatPadding="true" />
 
                 </TableRow>
 
@@ -74,7 +75,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
                         android:clickable="true"
-                        android:src="@android:drawable/ic_input_add" />
+                        android:src="@android:drawable/ic_menu_delete"
+                        app:useCompatPadding="true" />
 
                 </TableRow>
             </TableLayout>
