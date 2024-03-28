@@ -6,17 +6,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.Random;
 
 public class Task {
     private String name;
     private String desc;
     private String id;
-
+    
+    private Boolean done;
 
     public Task(String name){
         this.name = name;
-        this.id = Calendar.getInstance().toString();
 
+        //generate id
+        Random r = new Random();
+        this.id = Calendar.getInstance().toString() + r.nextInt() ;
+        this.done = false;
 
     }
 
@@ -28,5 +33,12 @@ public class Task {
 
     public String getName() {return this.name;}
     public String getId(){return this.id;}
+    public void completeTask(){
+        // TODO: 3/22/2024 decide whether to implement delete logic in task class 
+        done = true;
+    }
 
+    public void done() {
+        this.done = false;
+    }
 }

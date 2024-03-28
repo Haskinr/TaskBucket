@@ -14,12 +14,14 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.taskbucket.R;
 import com.example.taskbucket.databinding.FragmentTaskPickerBinding;
+import com.example.taskbucket.tasks.Task;
 import com.example.taskbucket.tasks.TaskList;
 
 public class TaskPicker extends Fragment {
 
     private FragmentTaskPickerBinding binding;
     private TaskList pickerlist;
+    private Task pickedtask;
 
     @Override
     public View onCreateView(
@@ -40,10 +42,26 @@ public class TaskPicker extends Fragment {
         binding.pickerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: 3/11/2024 Picker logic
-                Toast testtoast = new Toast(view.getContext());
-                testtoast.setText(pickerlist.getTaskName(1));
-                testtoast.show();
+                picknewtask();
+            }
+        });
+
+        binding.doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(pickedtask == null){
+                    //todo figure this out later
+
+                } else{
+                    pickedtask.done();
+                    //todo logic for removing from picker list and updating master list
+                    Toast test = new Toast(v.getContext());
+                    test.setText(pickedtask.getId());
+                    //test.show();
+
+                    pickerlist.removeTask(pickedtask.getId(), v.getContext());
+
+                }
             }
         });
     }
@@ -54,4 +72,14 @@ public class TaskPicker extends Fragment {
         binding = null;
     }
 
+    public void picknewtask(){
+        pickedtask = pickerlist.randomtask();
+        if (pickedtask == null){
+            binding.taskTitle.setText("All Done!");
+            return;
+        }
+
+        // TODO: 3/28/2024 replace with logic for full task card instead of just title
+        binding.taskTitle.setText(pickedtask.getName());
+    }
 }
