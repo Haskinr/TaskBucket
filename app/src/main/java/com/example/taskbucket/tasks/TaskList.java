@@ -5,6 +5,8 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.taskbucket.database.TaskDao;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -12,7 +14,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
-public class TaskList {
+public class TaskList implements TaskDao {
     private String why;
     private HashMap<String, Task> tasks;
 
@@ -55,5 +57,15 @@ public class TaskList {
 
     public void removeTask(String id, Context c) {
         tasks.remove(id);
+    }
+
+    @Override
+    public void insertTask(Task task) {
+
+    }
+
+    @Override
+    public List<Task> getAllTasks() {
+        return null;
     }
 }

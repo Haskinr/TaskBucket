@@ -5,13 +5,19 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.util.Calendar;
 import java.util.Random;
-
+@Entity
 public class Task {
+    @PrimaryKey
+    private String id;
+
     private String name;
     private String desc;
-    private String id;
+
     
     private Boolean done;
 
