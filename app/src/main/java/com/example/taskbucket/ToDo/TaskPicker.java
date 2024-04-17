@@ -56,7 +56,7 @@ public class TaskPicker extends Fragment {
                     pickedtask.done();
                     //todo logic for removing from picker list and updating master list
                     Toast test = new Toast(v.getContext());
-                    test.setText(pickedtask.getId());
+                    test.setText(String.valueOf(pickedtask.getId()));
                     //test.show();
 
                     pickerlist.removeTask(pickedtask.getId(), v.getContext());

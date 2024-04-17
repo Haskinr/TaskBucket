@@ -3,23 +3,19 @@ package com.example.taskbucket.tasks;
 import android.content.Context;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
-
-import com.example.taskbucket.database.TaskDao;
+import com.example.taskbucket.database.TaskBucketViewModel;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
-public class TaskList implements TaskDao {
+public class TaskList {
     private String why;
-    private HashMap<String, Task> tasks;
+    private HashMap<Integer, Task> tasks;
 
     public TaskList() {
-        this.tasks = new HashMap<String, Task>();
+        this.tasks = new HashMap<Integer, Task>();
     }
 
     public void addTask(Task task) {
@@ -46,26 +42,26 @@ public class TaskList implements TaskDao {
     }
 
 
-    public Task randomtask(){
+    public Task randomtask() {
         Object[] ts = tasks.values().toArray();
         int l = ts.length;
         Random r = new Random();
 
-        return (l < 1)? null: (Task)ts[r.nextInt(l)];
+        return (l < 1) ? null : (Task) ts[r.nextInt(l)];
 
     }
 
-    public void removeTask(String id, Context c) {
+    public void removeTask(long id, Context c) {
         tasks.remove(id);
     }
 
-    @Override
-    public void insertTask(Task task) {
-
+    public void getAllDbTasks(TaskBucketViewModel taskBucketViewModel) {
+        List<Task> listoftasks = taskBucketViewModel.getAllTasks().getValue();
+        if (listoftasks == null) return;
+        for (Task t : listoftasks
+        ) {
+            this.addTask(t);
+        }
     }
 
-    @Override
-    public List<Task> getAllTasks() {
-        return null;
-    }
 }

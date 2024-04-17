@@ -3,30 +3,31 @@ package com.example.taskbucket.tasks;
 import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.util.Calendar;
 import java.util.Random;
-@Entity
+@Entity(tableName = "task_table")
 public class Task {
-    @PrimaryKey
-    private String id;
-
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
+    private int id;
+@NonNull
     private String name;
-    private String desc;
+    private String description;
 
     
-    private Boolean done;
+    private boolean done;
 
     public Task(String name){
         this.name = name;
 
         //generate id
         Random r = new Random();
-        this.id = Calendar.getInstance().toString() + r.nextInt() ;
+        //this.id = Calendar.getInstance().toString() + r.nextInt() ;
         this.done = false;
 
     }
@@ -38,7 +39,14 @@ public class Task {
     }
 
     public String getName() {return this.name;}
-    public String getId(){return this.id;}
+    public int getId(){return this.id;}
+    public String getDescription(){return this.description;}
+    public boolean getDone(){return  this.done;}
+
+    public void setId(int id){this.id = id;}
+    public void setName(String name) {this.name = name;}
+    public void setDescription(String desc) {this.description = desc;}
+    public void setDone(boolean done){this.done= done;}
     public void completeTask(){
         // TODO: 3/22/2024 decide whether to implement delete logic in task class 
         done = true;

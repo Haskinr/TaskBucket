@@ -14,22 +14,30 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.taskbucket.R;
+import com.example.taskbucket.database.TaskBucketViewModel;
 import com.example.taskbucket.databinding.FragmentTasklistBinding;
 import com.example.taskbucket.tasks.Task;
+import com.example.taskbucket.tasks.TaskList;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 
 public class TaskListFragment extends Fragment {
     private FragmentTasklistBinding binding;
+    private TaskList planlist;
+    private TaskBucketViewModel tbvm;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        tbvm = new ViewModelProvider(this).get(TaskBucketViewModel.class);
+        planlist = new TaskList();
         binding = FragmentTasklistBinding.inflate(inflater, container, false);
         return binding.getRoot();
+
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -42,7 +50,8 @@ public class TaskListFragment extends Fragment {
             }
         });
         //todo - rework for scrolling table view
-        for (Task t: masterlist.getTasks()
+        planlist.getAllDbTasks(tbvm);
+        for (Task t: planlist.getTasks()
         ) {// get the title
             TableLayout taskTable = binding.taskTable;
             TableRow newrow = new TableRow(view.getContext());
