@@ -1,6 +1,7 @@
 package com.example.taskbucket.database;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -11,11 +12,13 @@ import java.util.List;
 public class TaskBucketRepository {
     private TaskDao tDAO;
     private LiveData<List<Task>> alltasks;
+    //private LiveData<List<Task>> alltasks;
 
     TaskBucketRepository(Application application){
         TaskBucketDatabase db = TaskBucketDatabase.getDatabase(application);
         tDAO = db.taskDao();
         alltasks = tDAO.getAllTasks();
+        Log.i("Taskbucket Repository" ,"Repo instantiated");
 
     }
 
@@ -23,10 +26,10 @@ public class TaskBucketRepository {
 
     long insert(Task task){
         final long[] test = new long[1];
-       TaskBucketDatabase.databaseWriteExecutor.execute(() ->{
-           test[0] = tDAO.insertTask(task);
+      TaskBucketDatabase.databaseWriteExecutor.execute(() ->{
+           tDAO.insertTask(task);
 
-        });
-       return test[0];
+       });
+       return 0;
     }
 }

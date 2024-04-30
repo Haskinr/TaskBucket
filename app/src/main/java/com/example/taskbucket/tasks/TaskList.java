@@ -1,7 +1,14 @@
 package com.example.taskbucket.tasks;
 
 import android.content.Context;
+import android.view.ViewGroup;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 
 import com.example.taskbucket.database.TaskBucketViewModel;
 
@@ -10,11 +17,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-public class TaskList {
+public class TaskList extends ListAdapter<Task, TaskViewHolder> {
     private String why;
     private HashMap<Integer, Task> tasks;
 
-    public TaskList() {
+    public TaskList(@NonNull DiffUtil.ItemCallback<Task> diffCallback) {
+        super(diffCallback);
         this.tasks = new HashMap<Integer, Task>();
     }
 
@@ -64,4 +72,29 @@ public class TaskList {
         }
     }
 
+    @NonNull
+    @Override
+    public TaskViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return TaskViewHolder.create(parent);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
+        Task current = getItem(position);
+        holder.bind(current.getName());
+    }
+
+    public static class TaskDiff extends DiffUtil.ItemCallback<Task> {
+
+        @Override
+        public boolean areItemsTheSame(@NonNull Task oldItem, @NonNull Task newItem) {
+            return oldItem == newItem;
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull Task oldItem, @NonNull Task  newItem) {
+            // TODO: 4/26/2024 more robust content comparison
+            return oldItem.getName().equals(newItem.getName());
+        }
+    }
 }

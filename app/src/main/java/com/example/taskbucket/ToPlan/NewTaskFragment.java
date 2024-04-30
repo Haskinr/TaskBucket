@@ -50,7 +50,7 @@ public class NewTaskFragment extends Fragment {
 
                 Toast test = new Toast(view.getContext());
                 test.setText(String.valueOf(testlong));
-                test.show();
+               // test.show();
 
                 NavHostFragment.findNavController(NewTaskFragment.this)
                         .navigate(R.id.action_newTaskFragment_to_TaskListFragment);

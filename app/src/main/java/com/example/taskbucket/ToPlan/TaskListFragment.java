@@ -16,6 +16,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taskbucket.R;
 import com.example.taskbucket.database.TaskBucketViewModel;
@@ -33,26 +35,39 @@ public class TaskListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        tbvm = new ViewModelProvider(this).get(TaskBucketViewModel.class);
-        planlist = new TaskList();
         binding = FragmentTasklistBinding.inflate(inflater, container, false);
+
+        tbvm = new ViewModelProvider(this).get(TaskBucketViewModel.class);
+
+        planlist = new TaskList(new TaskList.TaskDiff());
+        RecyclerView recyclerView = binding.recyclerview;
+        recyclerView.setAdapter(planlist);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
+
         return binding.getRoot();
 
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         binding.addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(TaskListFragment.this).navigate(R.id.action_TaskListFragment_to_newTaskFragment);
             }
         });
+
+tbvm.getAllTasks().observe(this.getViewLifecycleOwner(), tasks -> {
+        planlist.submitList(tasks);
+        int count = planlist.getItemCount();
+        Toast toast = new Toast(this.getContext());
+        toast.setText(String.valueOf(count));
+        toast.show();
+        });
         //todo - rework for scrolling table view
-        planlist.getAllDbTasks(tbvm);
-        for (Task t: planlist.getTasks()
-        ) {// get the title
+
+     /*   for (Task t: planlist.getTasks()
+        ) {
             TableLayout taskTable = binding.taskTable;
             TableRow newrow = new TableRow(view.getContext());
             TextView success = new TextView(view.getContext());
@@ -64,16 +79,16 @@ public class TaskListFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     // TODO: 3/21/2024 fill in with actual delete logic
-                    Toast testtoast = new Toast(v.getContext());
-                    testtoast.setText("deleting "+ t.getName());
-                    testtoast.show();
+                    Toast deletetoast = new Toast(v.getContext());
+                    deletetoast.setText("deleting "+ t.getName());
+                    deletetoast.show();
                 }
             }
 
         );
             newrow.addView(delete_btn);
             taskTable.addView(newrow);
-        }
+        }*/
 
     }
 

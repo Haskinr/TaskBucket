@@ -1,6 +1,7 @@
 package com.example.taskbucket;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         masterlist = setMasterlist();
-        Toast toast = new Toast(binding.getRoot().getContext());
+
     }
 
     @Override
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private TaskList setMasterlist() {
-        TaskList test = new TaskList();
+        TaskList test = new TaskList(new TaskList.TaskDiff());
         test.addTask(new Task("Test 1"));
         test.addTask(new Task("Test 2"));
         test.addTask(new Task("Test 3"));

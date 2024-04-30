@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".ToPlan.PlanActivity">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -22,15 +23,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize" />
 
+            <TextView
+                android:id="@+id/ActivityTest1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Plan Activity" />
+
         </com.google.android.material.appbar.AppBarLayout>
 
         <include layout="@layout/content_plan" />
-
-        <TextView
-            android:id="@+id/ActivityTest1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Plan Activity" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
