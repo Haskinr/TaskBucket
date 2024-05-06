@@ -21,6 +21,8 @@ public class TaskList extends ListAdapter<Task, TaskViewHolder> {
     private String why;
     private HashMap<Integer, Task> tasks;
 
+    private TaskBucketViewModel vm;
+
     public TaskList(@NonNull DiffUtil.ItemCallback<Task> diffCallback) {
         super(diffCallback);
         this.tasks = new HashMap<Integer, Task>();
@@ -51,11 +53,11 @@ public class TaskList extends ListAdapter<Task, TaskViewHolder> {
 
 
     public Task randomtask() {
-        Object[] ts = tasks.values().toArray();
-        int l = ts.length;
+        List<Task> tl = this.getCurrentList();
+        int l = tl.size();
         Random r = new Random();
 
-        return (l < 1) ? null : (Task) ts[r.nextInt(l)];
+        return (l < 1) ? null : (Task) tl.get(r.nextInt(l));
 
     }
 
@@ -78,10 +80,12 @@ public class TaskList extends ListAdapter<Task, TaskViewHolder> {
         return TaskViewHolder.create(parent);
     }
 
+    public void setViewModel (TaskBucketViewModel taskBucketViewModel){vm = taskBucketViewModel;}
+
     @Override
     public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
         Task current = getItem(position);
-        holder.bind(current.getName());
+        holder.bind(current, vm);
     }
 
     public static class TaskDiff extends DiffUtil.ItemCallback<Task> {

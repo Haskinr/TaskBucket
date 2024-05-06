@@ -21,7 +21,12 @@ public class TaskBucketViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Task>> getAllTasks() { return alltasks;}
-    public long insert(Task task){ return taskBucketRepository.insert(task);
+    public LiveData<List<Task>> getFilteredTasks(String col, boolean val){return taskBucketRepository.getFilteredTasks(col, val);}
+    public LiveData<List<Task>> getUnfinishedTasks(){return taskBucketRepository.getUnfinishedTasks();}
 
+    public long insert(Task task){ return taskBucketRepository.insert(task);}
+    public void updateTask(Task task){taskBucketRepository.update(task);}
+    public void deleteTask(Task task){
+        taskBucketRepository.deleteTask(task);
     }
 }

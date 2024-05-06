@@ -40,6 +40,7 @@ public class TaskListFragment extends Fragment {
         tbvm = new ViewModelProvider(this).get(TaskBucketViewModel.class);
 
         planlist = new TaskList(new TaskList.TaskDiff());
+        planlist.setViewModel(tbvm);
         RecyclerView recyclerView = binding.recyclerview;
         recyclerView.setAdapter(planlist);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));

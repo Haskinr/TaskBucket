@@ -23,7 +23,14 @@ public class TaskBucketRepository {
     }
 
     LiveData<List<Task>> getAllTasks(){return alltasks;}
+    LiveData<List<Task>> getFilteredTasks(String col, boolean val){return tDAO.getFilteredTasks(col, val);}
+    LiveData<List<Task>> getUnfinishedTasks(){return tDAO.getUnfinishedTasks();}
 
+    void deleteTask (Task task){
+        TaskBucketDatabase.databaseWriteExecutor.execute(() ->{
+            tDAO.deleteTask(task.getId());
+        });
+    }
     long insert(Task task){
         final long[] test = new long[1];
       TaskBucketDatabase.databaseWriteExecutor.execute(() ->{
@@ -31,5 +38,10 @@ public class TaskBucketRepository {
 
        });
        return 0;
+    }
+    void update(Task task){
+        TaskBucketDatabase.databaseWriteExecutor.execute(() ->{
+            tDAO.updateTask(task);
+        });
     }
 }
